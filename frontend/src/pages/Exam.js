@@ -1,11 +1,39 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Exam() {
   const { state } = useLocation();
+  const navigate = useNavigate();
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState({}); // stores answers
-  const questions = state?.questions || [];
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const [timeLeft, setTimeLeft] = useState(30 * 60);
+
+  // 🆕 Memoize questions so ESLint is happy and it doesn't recreate array every render
+  const questions = useMemo(() => state?.questions || [], [state?.questions]);
+
+  const handleFinish = useCallback(() => {
+    console.log("Selected Answers:", selectedOptions);
+    alert("Exam Finished!");
+    navigate("/result", { state: { answers: selectedOptions, questions } });
+  }, [navigate, selectedOptions, questions]);
+
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      handleFinish();
+      return;
+    }
+    const timerId = setInterval(() => {
+      setTimeLeft(prev => prev - 1);
+    }, 1000);
+    return () => clearInterval(timerId);
+  }, [timeLeft, handleFinish]);
+
+  const formatTime = (seconds) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+  };
 
   const handleOptionSelect = (index) => {
     setSelectedOptions({
@@ -20,9 +48,10 @@ export default function Exam() {
     }
   };
 
-  const handleFinish = () => {
-    console.log("Selected Answers:", selectedOptions);
-    alert("Exam Finished! Check console for selected answers.");
+  const handlePrevious = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
   };
 
   if (!questions.length) {
@@ -31,7 +60,13 @@ export default function Exam() {
 
   return (
     <div className="exam-container">
-      <h3>Question {currentQuestion + 1}/{questions.length}</h3>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <h3>Question {currentQuestion + 1}/{questions.length}</h3>
+        <div className="timer">
+          <strong>Time Left:</strong> {formatTime(timeLeft)}
+        </div>
+      </div>
+
       <p>{questions[currentQuestion].questionText}</p>
 
       <div className="options">
@@ -55,7 +90,16 @@ export default function Exam() {
         ))}
       </div>
 
-      <div style={{ marginTop: "20px" }}>
+      <div style={{ marginTop: "20px", display: 'flex', gap: '10px' }}>
+        {currentQuestion > 0 && (
+          <button
+            onClick={handlePrevious}
+            className="btn btn-secondary"
+          >
+            Previous Question
+          </button>
+        )}
+
         {currentQuestion < questions.length - 1 ? (
           <button
             onClick={handleNext}
