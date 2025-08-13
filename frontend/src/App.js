@@ -1,7 +1,11 @@
 import React from "react";
+import './App.css';
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import StartExam from "./pages/StartExam";
+import Exam from "./pages/Exam";
+import ProtectedRoute from "./components/ProtectedRoute"; // adjust path if needed
 
 export default function App() {
   return (
@@ -13,6 +17,12 @@ export default function App() {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+
+        {/* Wrap protected pages inside ProtectedRoute */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/start-exam" element={<StartExam />} />
+          <Route path="/exam" element={<Exam />} />
+        </Route>
       </Routes>
     </Router>
   );
