@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import StartExam from "./pages/StartExam";
 import Exam from "./pages/Exam";
+import Result from "./pages/Result"; // 🆕 Import the new Result page
 import ProtectedRoute from "./components/ProtectedRoute"; // adjust path if needed
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/start-exam" element={<StartExam />} />
           <Route path="/exam" element={<Exam />} />
+          <Route path="/result" element={<Result />} /> {/* 🆕 Added result route */}
         </Route>
       </Routes>
     </Router>
