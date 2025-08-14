@@ -37,3 +37,25 @@
     transform: rotate(360deg);
   }
 }
+
+/* Bright green styles for Finish Exam & Take Exam Again buttons */
+.btn-success {
+  background-color: #28a745 !important; /* Bright green */
+  border-color: #28a745 !important;
+  color: white !important;
+}
+
+.btn-success:disabled {
+  background-color: #28a745 !important; /* Keep bright green */
+  border-color: #28a745 !important;
+  opacity: 0.75; /* Slight fade when disabled */
+  cursor: not-allowed;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #218838 !important; /* Darker green on hover */
+}
+
+.btn-success:active {
+  background-color: #1e7e34 !important;
+}

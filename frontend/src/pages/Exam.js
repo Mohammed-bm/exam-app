@@ -9,30 +9,19 @@ export default function Exam() {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [timeLeft, setTimeLeft] = useState(30 * 60);
 
-  // Questions from navigation state
   const questions = useMemo(() => state?.questions || [], [state?.questions]);
 
-  // Finish exam and submit to backend
   const handleFinish = useCallback(() => {
-    const token = localStorage.getItem('token'); // must be set during login
+    const token = localStorage.getItem('token');
 
-    if (!token) {
-      alert("You are not logged in. Please log in again.");
-      navigate("/login");
-      return;
-    }
+    const answersById = {};
+    questions.forEach((q, idx) => {
+      if (selectedOptions[idx] !== undefined) {
+        answersById[q._id] = selectedOptions[idx];
+      }
+    });
 
-    // Payload matches backend expectation
-    const payload = {
-      answers: questions.reduce((acc, q, index) => {
-        if (selectedOptions[index] !== undefined) {
-          acc[q._id] = selectedOptions[index];
-        }
-        return acc;
-      }, {})
-    };
-
-    console.log("📤 Sending to backend:", payload);
+    const payload = { answers: answersById };
 
     fetch('http://localhost:5000/api/exam/submit-exam', {
       method: 'POST',
@@ -44,21 +33,17 @@ export default function Exam() {
     })
       .then(async (res) => {
         const data = await res.json();
-        console.log("📥 Backend response:", data);
-
         if (data?.score !== undefined && data?.total !== undefined) {
           navigate("/result", { state: { result: data } });
         } else {
           alert("Something went wrong with grading. Please try again.");
         }
       })
-      .catch(err => {
-        console.error("❌ Error submitting exam:", err);
+      .catch(() => {
         alert("Error submitting exam. Please try again.");
       });
   }, [navigate, selectedOptions, questions]);
 
-  // Timer countdown
   useEffect(() => {
     if (timeLeft <= 0) {
       handleFinish();
@@ -70,22 +55,19 @@ export default function Exam() {
     return () => clearInterval(timerId);
   }, [timeLeft, handleFinish]);
 
-  // Format time
   const formatTime = (seconds) => {
     const m = Math.floor(seconds / 60);
     const s = seconds % 60;
     return `${m}:${s < 10 ? '0' : ''}${s}`;
   };
 
-  // Handle option select
   const handleOptionSelect = (index) => {
-    setSelectedOptions({
-      ...selectedOptions,
+    setSelectedOptions(prev => ({
+      ...prev,
       [currentQuestion]: index,
-    });
+    }));
   };
 
-  // Navigation
   const handleNext = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
@@ -98,14 +80,15 @@ export default function Exam() {
     }
   };
 
-  // No questions
   if (!questions.length) {
     return <div className="container">No questions available</div>;
   }
 
+  // ✅ This ensures the button lights up instantly
+  const currentAnswered = selectedOptions[currentQuestion] !== undefined;
+
   return (
     <div className="exam-container">
-      {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h3>Question {currentQuestion + 1}/{questions.length}</h3>
         <div className="timer">
@@ -113,10 +96,8 @@ export default function Exam() {
         </div>
       </div>
 
-      {/* Question */}
       <p>{questions[currentQuestion].questionText}</p>
 
-      {/* Options */}
       <div className="options">
         {questions[currentQuestion].options.map((option, index) => (
           <div
@@ -138,7 +119,6 @@ export default function Exam() {
         ))}
       </div>
 
-      {/* Navigation buttons */}
       <div style={{ marginTop: "20px", display: 'flex', gap: '10px' }}>
         {currentQuestion > 0 && (
           <button onClick={handlePrevious} className="btn btn-secondary">
@@ -149,7 +129,7 @@ export default function Exam() {
         {currentQuestion < questions.length - 1 ? (
           <button
             onClick={handleNext}
-            disabled={selectedOptions[currentQuestion] === undefined}
+            disabled={!currentAnswered}
             className="btn btn-primary"
           >
             Next Question
@@ -157,7 +137,7 @@ export default function Exam() {
         ) : (
           <button
             onClick={handleFinish}
-            disabled={selectedOptions[currentQuestion] === undefined}
+            disabled={!currentAnswered}
             className="btn btn-success"
           >
             Finish Exam
