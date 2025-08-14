@@ -84,7 +84,6 @@ export default function Exam() {
     return <div className="container">No questions available</div>;
   }
 
-  // ✅ This ensures the button lights up instantly
   const currentAnswered = selectedOptions[currentQuestion] !== undefined;
 
   return (
