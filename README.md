@@ -17,7 +17,7 @@ A full-stack **MERN** (MongoDB, Express, React, Node.js) based exam application 
 ## 📷 Screenshots
 
 ### 1. Registration Page
-![Registration Page](screenshots/register.png)
+![Registration Page](screenshots/registration.png)
 
 ### 2. Login Page
 ![Login Page](screenshots/login.png)
