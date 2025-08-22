@@ -55,7 +55,7 @@ A full-stack **MERN** (MongoDB, Express, React, Node.js) based exam application 
 git clone https://github.com/Mohammed-bm/exam-app.git
 cd exam-app
 
-#Backend Setup
+Backend Setup
 cd backend
 npm install
 
@@ -67,7 +67,7 @@ JWT_SECRET=your_jwt_secret_here
 Run backend:
 npm start
 
-#Frontend Setup
+Frontend Setup
 cd ../frontend
 npm install
 npm start
