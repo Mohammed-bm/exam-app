@@ -6,6 +6,10 @@ const connectDB = async () => {
 
     // Day 10 test: added for AI inline comment
     console.log('MongoDB Connected');
+
+    // Day 11 test: added a minor log for inline comment
+    console.log('✅ DB connection function executed');
+
   } catch (err) {
     console.error(err.message);
 
