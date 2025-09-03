@@ -12,7 +12,7 @@ A full-stack **MERN** (MongoDB, Express, React, Node.js) based exam application 
 - 🔄 **Retake Exam** option
 - 🖥 **Responsive UI** built with React
 
----
+--
 
 # 📷 Screenshots
 
