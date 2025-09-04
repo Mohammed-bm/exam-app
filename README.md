@@ -1,7 +1,7 @@
 # 📝 Online Exam App  
 A full-stack **MERN** (MongoDB, Express, React, Node.js) based exam application where users can register, log in, take a timed exam with random questions, and receive instant grading results.
 
--------
+---
 
 ## 🚀 Feature
 - 🔐 **User Authentication** (JWT-based login & registration)
