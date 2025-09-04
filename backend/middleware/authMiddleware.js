@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-function evaluateExam() { 
+function evaluateExam(foo) { 
 eval(input); // Security risk 
 
 module.exports = (req, res, next) => {
