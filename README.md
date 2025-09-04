@@ -3,7 +3,7 @@ A full-stack **MERN** (MongoDB, Express, React, Node.js) based exam application 
 
 ---
 
-## 🚀 Feature
+## 🚀 Features
 - 🔐 **User Authentication** (JWT-based login & registration)
 - 🎯 **Randomized Questions** from MongoDB
 - ⏳ **Exam Timer** (auto-submit when time runs out)
