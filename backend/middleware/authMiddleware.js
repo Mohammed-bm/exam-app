@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 function evaluateExam(foo) { 
-eval(input); // Security risk 
+eval(input); // Security risk }
 
 module.exports = (req, res, next) => {
   // Try to get token from either 'Authorization' or 'x-auth-token'
