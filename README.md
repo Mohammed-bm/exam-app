@@ -30,7 +30,7 @@ A full-stack **MERN** (MongoDB, Express, React, Node.js) based exam application 
 ### 5. Results Page
 ![Results Page](screenshots/results.png)
 
----
+--
 
 ## 🛠 Tech Stack
 **Frontend:**
