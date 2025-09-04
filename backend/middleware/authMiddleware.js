@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 
 function evaluateExam(foo) { 
   eval(this);
+  eval();
   }
 
 module.exports = (req, res, next) => {
