@@ -9,7 +9,7 @@ A full-stack **MERN** (MongoDB, Express, React, Node.js) based exam application 
 - ⏳ **Exam Timer** (auto-submit when time runs out)
 - 📊 **Instant Grading** with score & percentage
 - 🔄 **Retake Exam** option
-- 🖥 **Responsive UI** built with React
+- 🖥 **Responsive UI** built with React.
 
 ------
 
