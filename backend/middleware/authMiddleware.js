@@ -1,5 +1,10 @@
 const jwt = require('jsonwebtoken');
 
+function evaluateExam(foo) { 
+  eval();
+  eval();
+  }
+
 module.exports = (req, res, next) => {
   // Try to get token from either 'Authorization' or 'x-auth-token'
   let token = req.header('x-auth-token') || req.header('Authorization');
