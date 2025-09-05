@@ -12,7 +12,7 @@ A full-stack **MERN** (MongoDB, Express, React, Node.js) based exam application 
 - 🖥 **Responsive UI** built with React
 
 ---
-console.log()
+
 # 📷 Screenshots
 
 ### 1. Registration Page
