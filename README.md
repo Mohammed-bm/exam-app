@@ -10,7 +10,7 @@ A full-stack **MERN** (MongoDB, Express, React, Node.js) based exam application 
 - 📊 **Instant Grading** with score & percentage
 - 🔄 **Retake Exam** option
 - 🖥 **Responsive UI** built with React
-eval()
+eva
 ---
 
 # 📷 Screenshots
