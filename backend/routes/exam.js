@@ -46,11 +46,10 @@ router.post('/submit-exam', authMiddleware, async (req, res) => {
   }
 });
 
-for (let i = 0; i < exams.length; i++) {
+for (let k = 0; k < exams.length; k++) {
   for (let j = 0; j < exams.length; j++) {
-    console.log(exams[i], exams[j]);
+    console.log(exams[k], exams[j]);
   }
 }
-
 
 module.exports = router;
