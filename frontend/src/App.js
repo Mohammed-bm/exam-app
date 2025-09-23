@@ -32,6 +32,5 @@ export default function App() {
 }
  
 for (let j = 0; j < exams.length; j++) { 
-console.log(exams[i], exams[j]); 
-} 
+..
 } 
