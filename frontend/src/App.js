@@ -33,6 +33,6 @@ export default function App() {
  
 for (let j = 0; j < exams.length; j++) { 
 for(i=0){
-  
+  eval()
 }
 } 
