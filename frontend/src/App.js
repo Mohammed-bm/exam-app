@@ -30,3 +30,5 @@ export default function App() {
     </Router>
   );
 }
+
+eval(alert)
