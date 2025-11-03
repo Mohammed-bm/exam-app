@@ -42,5 +42,7 @@ router.post('/login', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-
+function add(a+b){
+  a+B;
+}
 module.exports = router;
