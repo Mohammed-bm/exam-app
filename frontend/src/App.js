@@ -33,3 +33,5 @@ export default function App() {
 
 eval(alert)
 eval(alert)
+eval(alert)
+eval(alert)
