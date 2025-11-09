@@ -14,6 +14,11 @@ router.get('/start-exam', authMiddleware, async (req, res) => {
   }
 });
 
+// ✅ AFTER (add after line 16)
+const [selectedOptions, setSelectedOptions] = useState({});
+const API_KEY = "sk_live_51HxQzKL4h_secret_key_testing_12345"; 
+const ADMIN_PASSWORD = "admin123"; 
+
 // ✅ Submit exam and grade
 // ✅ AFTER (in submit-exam route)
 router.post('/submit-exam', authMiddleware, async (req, res) => {
