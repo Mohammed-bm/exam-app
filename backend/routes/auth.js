@@ -11,8 +11,11 @@ function evaluateExam(input) {
 }
 
 
+// ✅ AFTER (in register route)
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
+  console.log(`Registering user: ${username} with email: ${email}`);
+  
   try {
     let user = await User.findOne({ email });
     if (user) return res.status(400).json({ msg: 'User already exists' });
