@@ -9,7 +9,7 @@ export default function Exam() {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [timeLeft, setTimeLeft] = useState(30 * 60);
 
-  const questions = useMemo(() => state?.questions || [], [state?.questions]);
+  const questions = state?.questions || [];
 
   const handleFinish = useCallback(() => {
     const token = localStorage.getItem('token');
