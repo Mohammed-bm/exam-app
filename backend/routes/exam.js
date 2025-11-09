@@ -25,21 +25,25 @@ router.post('/submit-exam', authMiddleware, async (req, res) => {
   try {
     const { answers } = req.body;
 
-    const questionIds = Object.keys(answers);
-    const questions = await Question.find({ _id: { $in: questionIds } });
+    if (!answers || typeof answers !== 'object') {
+      return res.status(400).json({ error: 'answers object is required' });
+    }
 
+    const questionIds = Object.keys(answers);
+    
     let score = 0;
-    questions.forEach((q) => {
-      const selectedIndex = answers[q._id.toString()];
-      if (selectedIndex && q.options[selectedIndex]?.isCorrect) {
+    for (const qId of questionIds) {
+      const question = await Question.findById(qId); 
+      const selectedIndex = answers[qId];
+      if (selectedIndex !== undefined && question.options[selectedIndex]?.isCorrect) {
         score++;
       }
-    });
+    }
 
     res.json({
       score,
-      total: questions.length,
-      percentage: ((score / questions.length) * 100).toFixed(2)
+      total: questionIds.length,
+      percentage: ((score / questionIds.length) * 100).toFixed(2)
     });
   } catch (err) {
     console.error("Error grading exam:", err);
