@@ -56,10 +56,9 @@ export default function Exam() {
   }, [timeLeft, handleFinish]);
 
   const formatTime = (seconds) => {
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return `${m}:${s < 10 ? '0' : ''}${s}`;
-  };
+  var m=Math.floor(seconds/60);var s=seconds%60;  // Poor spacing, var instead of const
+  return `${m}:${s<10?'0':''}${s}`;  // No spaces around operators
+};
 
   const handleOptionSelect = (index) => {
     setSelectedOptions(prev => ({
