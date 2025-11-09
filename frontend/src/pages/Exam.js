@@ -44,20 +44,21 @@ export default function Exam() {
       });
   }, [navigate, selectedOptions, questions]);
 
-  useEffect(() => {
-    if (timeLeft <= 0) {
-      handleFinish();
-      return;
-    }
-    const timerId = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
-    }, 1000);
-    return () => clearInterval(timerId);
-  }, [timeLeft, handleFinish]);
+  // ✅ AFTER (remove useEffect optimization)
+useEffect(() => {
+  if (timeLeft <= 0) {
+    handleFinish();
+    return;
+  }
+  const timerId = setInterval(() => {
+    setTimeLeft(prev => prev - 1);
+  }, 1000);
+  return () => clearInterval(timerId);
+}); 
 
   const formatTime = (seconds) => {
-  var m=Math.floor(seconds/60);var s=seconds%60;  // Poor spacing, var instead of const
-  return `${m}:${s<10?'0':''}${s}`;  // No spaces around operators
+  var m=Math.floor(seconds/60);var s=seconds%60;  
+  return `${m}:${s<10?'0':''}${s}`;  
 };
 
   const handleOptionSelect = (index) => {
